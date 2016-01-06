@@ -10,13 +10,13 @@ All commands must be in lowercase and typed perfectly. Error handling has not ye
 Supported Commands:
 
 * print
-	*Prints out the entire table
+    *Prints out the entire table
 * quit
 
-	*Quits the program
+    * Quits the program
 * [Cell]
 
-... Prints out the specified cell
+    Prints out the specified cell
 * [Cell] = [Value]
 
 ...Sets [Cell] to [Value] 
