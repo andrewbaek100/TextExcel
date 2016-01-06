@@ -6,4 +6,11 @@ Feel free to take inspiration from my code, just don't copy/paste it! If you hav
 
 ##Usage
 
+All commands must be in lowercase and typed perfectly. Error handling has not yet been fully implemented
 Supported Commands:
+
+* print
+..*Prints out the entire table
+* quit
+..*Quits the program
+
