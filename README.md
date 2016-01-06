@@ -11,10 +11,10 @@ Supported Commands:
 
 * print
 
-...Prints out the entire table
+	Prints out the entire table
 * quit
 
-... Quits the program
+	Quits the program
 * [Cell]
 
 ... Prints out the specified cell
@@ -32,7 +32,7 @@ Supported Commands:
 
 ......Formula: (5 + 3 / 2 * A3)
 
-......*Numbers in a formula can be substituded with a Cell address that contains a double
+.......Numbers in a formula can be substituded with a Cell address that contains a double
 
 * Save <File>
 
