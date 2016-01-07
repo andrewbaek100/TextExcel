@@ -2,11 +2,12 @@
 //AP Computer Science 2016
 public class StringCell extends Cell{ //Cell of type String
 	public String type="string";
-	public StringCell(){
-		content="";
-	}
 	public StringCell(String input){
+		type="string";
 		content=input;
+	}
+	public StringCell(){
+		this("");
 	}
 	public String getContent(){
 		return content;

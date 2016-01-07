@@ -37,7 +37,7 @@ public class Table implements Savable{
 		}
 	}
 	public void printTable(){	//Prints table
-		headerRow(table.length);
+		headerRow(table[0].length);
 		for (int i=0;i<table.length;i++){
 			drawCell(Integer.toString(i+1)); //Draws table numbers
 			for (int j=0;j<table[i].length;j++){ //Creates cells with content from cells
@@ -107,7 +107,6 @@ public class Table implements Savable{
 				table[y][x]=new Cell();
 			}
 			else if (inputContent.charAt(0)=='('){ //For use in functions, not yet implemented
-				System.out.println("b");
 				table[y][x]=new FormulaCell(inputContent,table);
 			}
 		}

@@ -1,9 +1,9 @@
 //By Ryan Chan
 //AP Computer Science 2016
 public class DoubleCell extends Cell {//Cell of type double
-	public String type = "double";
 	public double content=0;
 	public DoubleCell(double input){
+		type = "double";
 		content = input;
 	}
 	public DoubleCell(int input){

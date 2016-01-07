@@ -4,7 +4,7 @@ import java.util.*;
 
 import persistence.PersistenceHelper;
 public class TextExcel {
-	public static int TABLE_X_SIZE=6;	//Class constants for table size
+	public static int TABLE_X_SIZE=5;	//Class constants for table size
 	public static int TABLE_Y_SIZE=6;
 	public static boolean running=true;
 	public static void main(String[] args) {

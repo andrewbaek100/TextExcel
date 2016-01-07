@@ -3,11 +3,11 @@
 import java.util.*;
 import java.text.*;
 public class DateCell extends Cell{//Cell of type Date
-	public String type = "date";
 	public Date content = new Date();
 	public String originalDate="";
 	public SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 	public DateCell(String input){
+		type = "date";
 		originalDate=input;
 		try {
 			content=format.parse(input);
