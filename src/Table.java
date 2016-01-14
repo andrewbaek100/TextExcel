@@ -143,4 +143,70 @@ public class Table implements Savable{
 		}
 		return count;
 	}
+	public void sort(String input){
+		char typeOrder = input.charAt(4);
+		char collum=input.charAt(6);
+		String row=input.substring(7,input.indexOf(" ",7));
+		int x1 = collum-'A';
+		int y1 = Integer.parseInt(row)-1;
+		
+		collum=input.charAt(input.indexOf(" - ")+3);
+		row=input.substring(input.indexOf(" - ")+4);
+		int x2 = collum-'A';
+		int y2 = Integer.parseInt(row)-1;
+		int[][] order = new int[y2-y1+1][x2-x1+1];
+		Cell[][] sortArray = new Cell[y2-y1+1][x2-x1+1];
+		for (int i = y1;i<=y2;i++){
+			System.arraycopy(table[i], x1, sortArray[i-y1], 0, x2-x1+1);
+		}
+		int size = (y2-y1+1)*(x2-x1+1);
+		double limit = 0;
+		double limitLow=0;
+		int limity=0;
+		int limitx=0;
+		int numInOrder=1;
+		for (int k = 0;k<size;k++){
+			limit=0;
+			limitLow=999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.0;
+			for (int i = 0;i<=y2-y1;i++){
+				for (int j = 0;j<=x2-x1;j++){
+					if (sortArray[i][j].type.equals("double")||sortArray[i][j].type.equals("formula")){
+						
+						if (Math.max(sortArray[i][j].getNumber(), limit)==sortArray[i][j].getNumber()&&typeOrder=='d'){
+							limit=sortArray[i][j].getNumber();
+							limity=i;
+							limitx=j;
+						} else if (Math.min(sortArray[i][j].getNumber(), limitLow)==sortArray[i][j].getNumber()&&typeOrder=='a'){
+							limitLow=sortArray[i][j].getNumber();
+							limity=i;
+							limitx=j;
+						}
+						
+					}
+					
+				}
+			}
+			sortArray[limity][limitx]= new Cell();
+			order[limity][limitx]=numInOrder;
+			numInOrder++;
+		}
+		for (int i = y1;i<=y2;i++){
+			System.arraycopy(table[i], x1, sortArray[i-y1], 0, x2-x1+1);
+		}
+		int current=1;
+		for (int h=0;h<sortArray.length;h++){
+			for (int k = 0; k<sortArray[h].length;k++){
+				
+				for (int i = 0;i<order.length;i++){
+					for (int j =0; j<order[i].length;j++){
+						if (order[i][j]==current){
+							table[y1+h][x1+k]=sortArray[i][j];
+						}
+					}
+				}
+				current++;
+			}
+		}
+		
+	}
 }

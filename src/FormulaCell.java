@@ -8,6 +8,9 @@ public class FormulaCell extends Cell{//Cell of type Formula
 		content=input;
 		this.table=table;
 	}
+	public FormulaCell(FormulaCell old){
+		this(old.toString(),old.table);
+	}
 	public double getNumber(){
 		return Double.parseDouble(evaluate());
 	}

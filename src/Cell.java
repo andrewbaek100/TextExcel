@@ -1,4 +1,4 @@
-public class Cell { //Default Cell object
+public class Cell{ //Default Cell object
 	public String content="";
 	public String type="default";
 	public Cell(){

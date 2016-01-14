@@ -16,7 +16,6 @@ public class TextExcel {
 			System.out.print("Enter a command: ");
 			parseInput(sc.nextLine(),grid);
 		}
-		
 	}
 	public static void parseInput(String input,Table grid){	//Acts on the user input
 		char number='.';
@@ -54,6 +53,8 @@ public class TextExcel {
 				e.printStackTrace();
 				System.out.println("Error while loading "+input.substring(5));
 			}
+		} else if (input.substring(0,4).equals("sort")){
+			grid.sort(input);
 		}
 		else {
 			System.out.println("Command not recognized");
