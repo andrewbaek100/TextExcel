@@ -38,10 +38,10 @@ Supported Commands:
 
 * clear [Cell]
 
-    *Clears the specified cell
+    * Clears the specified cell
 * clear
 
-    *If no arguments are passed, clears the entire table
+    * If no arguments are passed, clears the entire table
 * save [File]
 
     * Saves current spreadsheet to file named [File] in the current directory
