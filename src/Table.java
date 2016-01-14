@@ -170,18 +170,24 @@ public class Table implements Savable{
 			limitLow=999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.0;
 			for (int i = 0;i<=y2-y1;i++){
 				for (int j = 0;j<=x2-x1;j++){
-					if (sortArray[i][j].type.equals("double")||sortArray[i][j].type.equals("formula")){
-						
-						if (Math.max(sortArray[i][j].getNumber(), limit)==sortArray[i][j].getNumber()&&typeOrder=='d'){
-							limit=sortArray[i][j].getNumber();
-							limity=i;
-							limitx=j;
-						} else if (Math.min(sortArray[i][j].getNumber(), limitLow)==sortArray[i][j].getNumber()&&typeOrder=='a'){
-							limitLow=sortArray[i][j].getNumber();
-							limity=i;
-							limitx=j;
+					if (typeOrder == 'd') {
+						if (sortArray[i][j].type.equals("double") || sortArray[i][j].type.equals("formula")) {
+
+							if (Math.max(sortArray[i][j].getNumber(), limit) == sortArray[i][j].getNumber()) {
+								limit = sortArray[i][j].getNumber();
+								limity = i;
+								limitx = j;
+							}
 						}
-						
+					}
+					if (typeOrder == 'a') {
+						if (sortArray[i][j].type.equals("double") || sortArray[i][j].type.equals("formula")) {
+							if (Math.min(sortArray[i][j].getNumber(), limitLow) == sortArray[i][j].getNumber()) {
+								limitLow = sortArray[i][j].getNumber();
+								limity = i;
+								limitx = j;
+							}
+						}
 					}
 					
 				}
