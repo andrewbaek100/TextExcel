@@ -30,9 +30,29 @@ Supported Commands:
 
         * Date: 1/12/1976
 
-        * Formula: (5 + 3 / 2 * A3)
+        * Formula: ( 5 + 3 / 2 * A3 )
 
             * Numbers in a formula can be substituded with a Cell address that contains a double
+            
+            * The avg and sum commands can be used inside of a formula, ex. ( avg A1 - C2) will take the average of all cells inside the block of cells from A1 to C2
 
-* Save <File>
+* clear [Cell]
+
+    *Clears the specified cell
+* clear
+
+    *If no arguments are passed, clears the entire table
+* save [File]
+
+    * Saves current spreadsheet to file named [File] in the current directory
+* load [File]
+
+    * Loads spreadsheet from file named [File] in the current directory
+* sorta [Cell1] - [Cell2]
+
+    * Sorts double and formula cells within the specified cell block from [Cell1] to [Cell2] in ascending order
+* sortd [Cell1] - [Cell2]
+
+    * Sorts double and formula cells within the specified cell block from [Cell1] to [Cell2] in descending order
+
 

@@ -160,14 +160,16 @@ public class Table implements Savable{
 			System.arraycopy(table[i], x1, sortArray[i-y1], 0, x2-x1+1);
 		}
 		int size = (y2-y1+1)*(x2-x1+1);
-		double limit = 0;
-		double limitLow=0;
+		double limit,limitLow;
+		String limitString,limitStringLow;
 		int limity=0;
 		int limitx=0;
 		int numInOrder=1;
 		for (int k = 0;k<size;k++){
 			limit=0;
 			limitLow=999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.0;
+			limitString="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			limitStringLow="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
 			for (int i = 0;i<=y2-y1;i++){
 				for (int j = 0;j<=x2-x1;j++){
 					if (typeOrder == 'd') {
@@ -181,6 +183,7 @@ public class Table implements Savable{
 						}
 					}
 					if (typeOrder == 'a') {
+						
 						if (sortArray[i][j].type.equals("double") || sortArray[i][j].type.equals("formula")) {
 							if (Math.min(sortArray[i][j].getNumber(), limitLow) == sortArray[i][j].getNumber()) {
 								limitLow = sortArray[i][j].getNumber();
