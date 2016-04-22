@@ -15,9 +15,9 @@ public class Table implements Savable{
 	public Table(){ //Default size is 12x12
 		this(12,12);
 	}
-	public String[] getSaveData(){
+	public String[] getSaveData(){	//Creates a String array from table data
 		String[] dataTable = new String[table.length*table[0].length+2];
-		dataTable[0]=Integer.toString(table.length);
+		dataTable[0]=Integer.toString(table.length);	//First 2 indexes are used to store table dimensions
 		dataTable[1]=Integer.toString(table[0].length);
 		for (int i=0;i<table.length;i++){
 			for (int j=0;j<table[i].length;j++){
@@ -26,8 +26,8 @@ public class Table implements Savable{
 		}
 		return dataTable;
 	}
-	public void loadFrom(String[] saveData){
-		table = new Cell[Integer.parseInt(saveData[0])][Integer.parseInt(saveData[1])];
+	public void loadFrom(String[] saveData){//Loads data table from a String array
+		table = new Cell[Integer.parseInt(saveData[0])][Integer.parseInt(saveData[1])];//Loads dimensions from first 2 slots in array
 		String coords;
 		for (int i=0;i<table.length;i++){
 			for (int j=0;j<table[i].length;j++){
@@ -49,7 +49,7 @@ public class Table implements Savable{
 		}
 	}
 	private static void drawCell(String content){	//Draws a cell using a given String
-		if (content.length()>12){
+		if (content.length()>12){	//If content is over 12 characters, shortens it
 			content=content.substring(0, 11)+">";
 		}
 		int spaceLength = (12 - content.length()) / 2;	//Calculates needed spaces to center String
@@ -97,7 +97,6 @@ public class Table implements Savable{
 		catch(NumberFormatException e){
 			
 			if (inputContent.charAt(0)=='"'){ //If input is a String, creates a String cell
-				System.out.println("c");
 				table[y][x]=new StringCell(inputContent);
 			}
 			else if (countOccurance(inputContent,"/")==2&&(inputContent.contains(" ")==false)){//Determines if input string is a date, if so creates a Date cell
@@ -106,7 +105,7 @@ public class Table implements Savable{
 			else if (inputContent.equals("<empty>")){ //If input is <empty>, an empty default cell is created
 				table[y][x]=new Cell();
 			}
-			else if (inputContent.charAt(0)=='('){ //For use in functions, not yet implemented
+			else if (inputContent.charAt(0)=='('){ //For use in functions
 				table[y][x]=new FormulaCell(inputContent,table);
 			}
 		}
@@ -143,67 +142,68 @@ public class Table implements Savable{
 		}
 		return count;
 	}
-	public void sort(String input){
-		char typeOrder = input.charAt(4);
-		char collum=input.charAt(6);
+	public void sort(String input){	//Sorts cells in ascending or descending order
+		char typeOrder = input.charAt(4); //Checks if order will be ascending or descending
+		
+		char collum=input.charAt(6);	//Gets first address
 		String row=input.substring(7,input.indexOf(" ",7));
 		int x1 = collum-'A';
 		int y1 = Integer.parseInt(row)-1;
 		
-		collum=input.charAt(input.indexOf(" - ")+3);
+		collum=input.charAt(input.indexOf(" - ")+3); //Gets second address
 		row=input.substring(input.indexOf(" - ")+4);
 		int x2 = collum-'A';
 		int y2 = Integer.parseInt(row)-1;
-		int[][] order = new int[y2-y1+1][x2-x1+1];
-		Cell[][] sortArray = new Cell[y2-y1+1][x2-x1+1];
-		for (int i = y1;i<=y2;i++){
+		
+		int[][] order = new int[y2-y1+1][x2-x1+1]; //Int array used to store cell order
+		Cell[][] sortArray = new Cell[y2-y1+1][x2-x1+1];	//Temporary array used to store cells while they are moved
+		for (int i = y1;i<=y2;i++){	//Copies specified section of main table to the temporary array
 			System.arraycopy(table[i], x1, sortArray[i-y1], 0, x2-x1+1);
 		}
-		int size = (y2-y1+1)*(x2-x1+1);
+		int size = (y2-y1+1)*(x2-x1+1);	//Number of cells in the region
 		double limit,limitLow;
 		String limitString,limitStringLow;
 		int limity=0;
 		int limitx=0;
 		int numInOrder=1;
 		for (int k = 0;k<size;k++){
-			limit=0;
+			limit=0;	//sets limit variables to extreme values to start off the process of determining cell order
 			limitLow=999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.0;
 			limitString="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 			limitStringLow="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
 			for (int i = 0;i<=y2-y1;i++){
 				for (int j = 0;j<=x2-x1;j++){
-					if (typeOrder == 'd') {
+					if (typeOrder == 'd') {	//If order is descending, finds max number
 						if (sortArray[i][j].type.equals("double") || sortArray[i][j].type.equals("formula")) {
 
-							if (Math.max(sortArray[i][j].getNumber(), limit) == sortArray[i][j].getNumber()) {
+							if (Math.max(sortArray[i][j].getNumber(), limit) == sortArray[i][j].getNumber()) { //Finds cell with the highest value and records its data and position
 								limit = sortArray[i][j].getNumber();
 								limity = i;
 								limitx = j;
 							}
 						}
 					}
-					if (typeOrder == 'a') {
-						
+					if (typeOrder == 'a') {//If order is ascending, finds min number
 						if (sortArray[i][j].type.equals("double") || sortArray[i][j].type.equals("formula")) {
-							if (Math.min(sortArray[i][j].getNumber(), limitLow) == sortArray[i][j].getNumber()) {
+							if (Math.min(sortArray[i][j].getNumber(), limitLow) == sortArray[i][j].getNumber()) {//Finds cell with the lowest value and records its data and position
 								limitLow = sortArray[i][j].getNumber();
 								limity = i;
 								limitx = j;
 							}
 						}
-					}
-					
+					}				
 				}
 			}
-			sortArray[limity][limitx]= new Cell();
-			order[limity][limitx]=numInOrder;
+			sortArray[limity][limitx]= new Cell();	//Takes resulting cell from this sorting cycle, & deletes it
+			sortArray[limity][limitx].setContent("used");
+			order[limity][limitx]=numInOrder;	//Stores the cell's position and order
 			numInOrder++;
 		}
-		for (int i = y1;i<=y2;i++){
+		for (int i = y1;i<=y2;i++){	//Resets the temporary array to once again match the region of the excel table exactly
 			System.arraycopy(table[i], x1, sortArray[i-y1], 0, x2-x1+1);
 		}
 		int current=1;
-		for (int h=0;h<sortArray.length;h++){
+		for (int h=0;h<sortArray.length;h++){	//Reorders the region using the copied cells in the temporary array and the order stored in the order array
 			for (int k = 0; k<sortArray[h].length;k++){
 				
 				for (int i = 0;i<order.length;i++){
@@ -216,6 +216,37 @@ public class Table implements Savable{
 				current++;
 			}
 		}
-		
+	}
+	public static void help(String input){	//Help command, displayes various help messages for different inputs
+		String shortened = "NO";
+		if (input.length()<=5){
+			System.out.println("\nWelcome to TextExcel!\nValid Commands\n------------------");
+			System.out.println("print, quit, <cell>, clear, save, load, sorta, sortd");
+			System.out.println("\nCommands are case sensitive");
+			System.out.println("\nFor more in-depth information on a command, use \"help <command>\"");
+		} else{
+			shortened=input.substring(5);
+		}
+		if (shortened.equals("print")){
+			System.out.println("Usage: \n\n\tprint\n\nPrints out the entire spreadsheet\n");
+		}else if (shortened.equals("quit")){
+			System.out.println("Usage: \n\n\tquit\n\nQuits the program. Any unsaved changes to the spreadsheet will be lost\n");
+		}else if (shortened.equals("<cell>")){
+			System.out.println("Usage: \n\n\t<cell>\n\nPrints out the raw content of the specified cell\n\n\t<cell> = <data>\n\nSets the content of the specified cell to the specified data\n");
+		}else if (shortened.equals("clear")){
+			System.out.println("Usage: \n\n\tclear\n\nClears the entire table\n\n\tclear <cell>\n\nClears the specified cell\n");
+		}else if (shortened.equals("save")){
+			System.out.println("Usage: \n\n\tsave <file name>\n\nSaves the table to the specified file. Default file location is the program's directory\n");
+		}else if (shortened.equals("load")){
+			System.out.println("Usage: \n\n\tload <file name>\n\nLoads a table from the specified file. By default, the program will search its directory for the file\n");
+		}else if (shortened.equals("sorta")){
+			System.out.println("Usage: \n\n\tsorta <cell1> - <cell2>\n\nSorts cells in the specified block of cells bounded by <cell1> and <cell2>, in ascending order\n");
+		}else if (shortened.equals("sortd")){
+			System.out.println("Usage: \n\n\tsorta <cell1> - <cell2>\n\nSorts cells in the specified block of cells bounded by <cell1> and <cell2>, in ascending order\n");
+		}else if (shortened.equals("NO")){
+			System.out.println();
+		}else {
+			System.out.println("'"+shortened+"' is not a recognized command. Use 'help' for more information on commands\n");
+		}
 	}
 }

@@ -1,8 +1,7 @@
 10
 10
-5.0
-"Hello"
-7.0
+"hello"
+"good-bye"
 <empty>
 <empty>
 <empty>
@@ -10,19 +9,8 @@
 <empty>
 <empty>
 <empty>
-10.0
-20.0
-30.0
 <empty>
-<empty>
-<empty>
-<empty>
-<empty>
-<empty>
-<empty>
-14.5
-15.2
--3.6
+3.14
 <empty>
 <empty>
 <empty>
@@ -33,8 +21,6 @@
 <empty>
 <empty>
 <empty>
-( sum A1 - C1 )
-( sum C1 - C3 )
 <empty>
 <empty>
 <empty>
@@ -43,7 +29,21 @@
 <empty>
 <empty>
 <empty>
-( avg A2 - C3 )
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
+<empty>
 <empty>
 <empty>
 <empty>

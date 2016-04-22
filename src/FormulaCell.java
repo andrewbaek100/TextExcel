@@ -119,7 +119,7 @@ public class FormulaCell extends Cell{//Cell of type Formula
 		int y2 = Integer.parseInt(row)-1;
 		for (int i = y1;i<=y2;i++){
 			for (int j = x1;j<=x2;j++){
-				if (table[i][j].type.equals("double")||table[i][j].type.equals("double")){
+				if (table[i][j].type.equals("double")||table[i][j].type.equals("formula")){
 					total+=table[i][j].getNumber();
 					count++;
 				}
